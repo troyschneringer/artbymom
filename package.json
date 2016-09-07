@@ -4,6 +4,7 @@
   "description": "artbymom.com",
   "main": "index.js",
   "scripts": {
+    "deploy": "gh-pages -d public",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/troyschneringer/artbymom/issues"
   },
-  "homepage": "https://github.com/troyschneringer/artbymom#readme"
+  "homepage": "https://github.com/troyschneringer/artbymom#readme",
+  "devDependencies": {
+    "gh-pages": "^0.11.0"
+  }
 }
