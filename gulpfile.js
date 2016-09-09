@@ -1,0 +1,77 @@
+const babel = require('gulp-babel');
+const concat = require('gulp-concat');
+const gulp = require('gulp');
+const jsoncombine = require("gulp-jsoncombine");
+const less = require('gulp-less');
+const path = require('path');
+const minify = require('gulp-minify');
+const webpack = require('webpack-stream');
+
+
+// Databases
+
+gulp.task('data', function() {
+    gulp.src('./data/lessons/*.json')
+        .pipe(gulp.dest('./www/data/lessons'));
+});
+
+// Less
+gulp.task('less', function () {
+  return gulp.src('./less/**/*.less')
+    .pipe(less({
+      paths: [ path.join(__dirname, 'less', 'includes') ]
+    }))
+    .pipe(concat('artbymom.css'))
+    .pipe(gulp.dest('./www/css'));
+});
+
+// React
+gulp.task('react', () =>
+    gulp.src('./src/**/*.js')
+        .pipe(babel({
+            presets: ['es2015', 'react']
+        }))
+        .pipe(concat('artbymom.js'))
+        .pipe(gulp.dest('./www/js'))
+);
+
+// Watch
+gulp.task('watch', function() {
+    gulp.watch('./less/**/*.less', ['less']);
+    gulp.watch('./data/**/*.json', ['data']);
+    gulp.watch('./src/**/*.js', ['webpack']);
+});
+
+// Webpack
+gulp.task('webpack', function() {
+  return gulp.src('src/app.js')
+    .pipe(webpack({
+        output: {
+            filename: 'app.js',
+        },
+        module: {
+            loaders: [
+                {
+                    test: /\.js$/,
+                    exclude: /node_modules/,
+                    loader: 'babel-loader?presets[]=es2015&presets[]=react'
+                },
+                {
+                    test: /\.json$/,
+                    loader: 'json'
+                }
+            ]
+        }
+    }))
+    .pipe(minify({
+        ext: {
+            src:'.js',
+            min:'.min.js'
+        }
+    }))
+    .pipe(gulp.dest('./www/js'));
+});
+
+// Target tasks
+
+gulp.task('default', ['less', 'watch', 'webpack']);
