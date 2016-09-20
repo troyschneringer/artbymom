@@ -1,7 +1,7 @@
 import React from 'react'
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 
-import FeaturedLesson from './FeaturedLesson.js'
+import FeaturedProject from './FeaturedProject.js'
 
 export default React.createClass({
   render() {
@@ -11,11 +11,11 @@ export default React.createClass({
           <h1>Real art. Real moms. Real fun.</h1>
         </Jumbotron>
         <div className="container">
-          <FeaturedLesson lessonId="1" align="right" />
+          <FeaturedProject projectId="1" align="right" />
           <hr className="featurette-divier"/>
-          <FeaturedLesson lessonId="2" align="left" />
+          <FeaturedProject projectId="2" align="left" />
           <hr className="featurette-divier"/>
-          <FeaturedLesson lessonId="3" align="right" />
+          <FeaturedProject projectId="3" align="right" />
         </div>
       </div>
     );

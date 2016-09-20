@@ -12,7 +12,7 @@ export default React.createClass({
             </div>
             <div id="navbar" className="collapse navbar-collapse">
               <ul className="nav navbar-nav">
-                <li><Link to="/lessons" activeClassName="active">Lessons</Link></li>
+                <li><Link to="/projects" activeClassName="active">Projects</Link></li>
                 <li><a href="#">About</a></li>
               </ul>
             </div>

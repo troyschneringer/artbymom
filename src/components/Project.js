@@ -7,7 +7,7 @@ import Steps from './Steps.js'
 export default React.createClass({
   getInitialState() {
     return {
-      lesson: {
+      project: {
         name: '',
         steps: []
       }
@@ -15,17 +15,17 @@ export default React.createClass({
   },
 
   componentDidMount() {
-    var url = 'data/lessons/lesson' + this.props.params.lessonId + '.json';
-    this.lessonRequest = $.get(url, function (data) {
+    var url = 'data/projects/project' + this.props.params.projectId + '.json';
+    this.projectRequest = $.get(url, function (data) {
       this.setState(state => {
-        state.lesson = data;
+        state.project = data;
         return state;
       });
     }.bind(this));
   },
 
   componentWillUnmount() {
-    this.lessonRequest.abort();
+    this.projectRequest.abort();
   },
 
   render() {
@@ -34,13 +34,13 @@ export default React.createClass({
         <Row>
           <Col lg={12}>
             <Jumbotron>
-              <h1>{this.state.lesson.name}</h1>
+              <h1>{this.state.project.name}</h1>
             </Jumbotron>
           </Col>
         </Row>
         <Row>
           <Col lg={12}>
-            <Steps steps={this.state.lesson.steps} />
+            <Steps steps={this.state.project.steps} />
           </Col>
         </Row>
       </Grid>

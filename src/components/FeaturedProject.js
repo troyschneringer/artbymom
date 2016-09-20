@@ -5,7 +5,7 @@ export default React.createClass({
 
     getInitialState() {
         return {
-            lesson: {
+            project: {
                 name: '',
                 description: '',
                 imageUrl: ''
@@ -14,29 +14,29 @@ export default React.createClass({
     },
 
     componentDidMount() {
-        var url = 'data/lessons/lesson' + this.props.lessonId + '.json';
-        this.lessonRequest = $.get(url, function (data) {
+        var url = 'data/projects/project' + this.props.projectId + '.json';
+        this.projectRequest = $.get(url, function (data) {
             this.setState(state => {
-                state.lesson = data;
+                state.project = data;
                 return state;
             });
         }.bind(this));
     },
 
     componentWillUnmount() {
-        this.lessonRequest.abort();
+        this.projectRequest.abort();
     },
 
     render() {
         return (
             <div className="row featurette">
                 <div className={"col-md-7" + (this.props.align == 'left' ? " col-md-push-5" : "") }>
-                    <h2 className="featurette-heading">{this.state.lesson.name}</h2>
-                    <p>{this.state.lesson.description}</p>
-                    <Link to={"/lessons/" + this.props.lessonId} className="info">See the full lesson...</Link>
+                    <h2 className="featurette-heading">{this.state.project.name}</h2>
+                    <p>{this.state.project.description}</p>
+                    <Link to={"/projects/" + this.props.projectId} className="info">See the full project...</Link>
                 </div>
                 <div className={"col-md-5" + (this.props.align == 'left' ? " col-md-pull-7" : "") }>
-                    <img className="featurette-image img-responsive center-block" alt="500x500" src={this.state.lesson.imageUrl} />
+                    <img className="featurette-image img-responsive center-block" alt="500x500" src={this.state.project.imageUrl} />
                 </div>
             </div>
         )

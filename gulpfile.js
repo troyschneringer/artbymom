@@ -13,8 +13,8 @@ const webpack = require('webpack-stream');
 // Databases
 
 gulp.task('data', function() {
-    gulp.src('./data/lessons/*.json')
-        .pipe(gulp.dest('./www/data/lessons'))
+    gulp.src('./data/projects/*.json')
+        .pipe(gulp.dest('./www/data/projects'))
         .pipe(jsonTransform(function(data, file) {
             return {
                 id: data.id,
@@ -23,8 +23,8 @@ gulp.task('data', function() {
             };
         }))
         .pipe(concat('index.json', {newLine: ',\n    '}))
-        .pipe(inject.wrap('{\n  "lessons": [\n    ', '\n  ]\n}'))
-        .pipe(gulp.dest('./www/data/lessons'));
+        .pipe(inject.wrap('{\n  "projects": [\n    ', '\n  ]\n}'))
+        .pipe(gulp.dest('./www/data/projects'));
 });
 
 // Less

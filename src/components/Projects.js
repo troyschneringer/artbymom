@@ -5,43 +5,43 @@ import { Link } from 'react-router'
 export default React.createClass({
   getInitialState() {
     return {
-      lessons: []
+      projects: []
     };
   },
 
   componentDidMount() {
-    this.lessonsRequest = $.get("data/lessons/index.json", function(data){
+    this.projectsRequest = $.get("data/projects/index.json", function(data){
       this.setState({
-        lessons: data.lessons
+        projects: data.projects
       });
     }.bind(this));
   },
 
   componentWillUnmount() {
-    this.lessonsRequest.abort();
+    this.projectsRequest.abort();
   },
 
   render() {
     return (
       <Grid>
         <div className="page-header">
-          <h1>Lessons</h1>
+          <h1>Projects</h1>
         </div>
-        <LessonSummaryList lessons={this.state.lessons}/>
+        <ProjectSummaryList projects={this.state.projects}/>
       </Grid>
     )
   }
 })
 
-var LessonSummary = React.createClass({
+var ProjectSummary = React.createClass({
   render: function() {
     return (
       <Col md={3} xs={6}>
         <div className="hovereffect">
-          <img className="img-responsive" src={this.props.lesson.imageUrl} />
+          <img className="img-responsive" src={this.props.project.imageUrl} />
           <div className="overlay">
-          <h2>{this.props.lesson.name}</h2>
-          <Link to={"/lessons/" + this.props.lesson.id} className="info">see more</Link>
+          <h2>{this.props.project.name}</h2>
+          <Link to={"/projects/" + this.props.project.id} className="info">see more</Link>
         </div>
       </div>
     </Col>
@@ -49,12 +49,12 @@ var LessonSummary = React.createClass({
   }
 });
 
-var LessonSummaryList = React.createClass({
+var ProjectSummaryList = React.createClass({
   render: function() {
     return (
       <Row>
-        {this.props.lessons.map(function(lesson){
-          return <LessonSummary key={lesson.id} lesson={lesson} /> })}
+        {this.props.projects.map(function(project){
+          return <ProjectSummary key={project.id} project={project} /> })}
       </Row>
     );
   } 
