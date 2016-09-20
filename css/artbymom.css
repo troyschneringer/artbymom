@@ -76,7 +76,7 @@ body {
   transform: scale(1);
 }
 .home .jumbotron {
-  background: url('/images/paints.png') no-repeat center center;
+  background: url('/artbymom/images/paints.png') no-repeat center center;
   height: 550px;
 }
 .home .jumbotron h1 {
