@@ -64,13 +64,13 @@
 
 	var _Home2 = _interopRequireDefault(_Home);
 
-	var _Lessons = __webpack_require__(333);
+	var _Projects = __webpack_require__(333);
 
-	var _Lessons2 = _interopRequireDefault(_Lessons);
+	var _Projects2 = _interopRequireDefault(_Projects);
 
-	var _Lesson = __webpack_require__(492);
+	var _Project = __webpack_require__(492);
 
-	var _Lesson2 = _interopRequireDefault(_Lesson);
+	var _Project2 = _interopRequireDefault(_Project);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -81,8 +81,8 @@
 	    _reactRouter.Route,
 	    { path: '/', component: _App2.default },
 	    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/lessons', component: _Lessons2.default }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/lessons/:lessonId', component: _Lesson2.default })
+	    _react2.default.createElement(_reactRouter.Route, { path: '/projects', component: _Projects2.default }),
+	    _react2.default.createElement(_reactRouter.Route, { path: '/projects/:projectId', component: _Projects2.default })
 	  )
 	), document.getElementById('react-container'));
 
@@ -27154,8 +27154,8 @@
 	                null,
 	                _react2.default.createElement(
 	                  _reactRouter.Link,
-	                  { to: '/lessons', activeClassName: 'active' },
-	                  'Lessons'
+	                  { to: '/projects', activeClassName: 'active' },
+	                  'Projects'
 	                )
 	              ),
 	              _react2.default.createElement(
@@ -27194,9 +27194,9 @@
 
 	var _Jumbotron2 = _interopRequireDefault(_Jumbotron);
 
-	var _FeaturedLesson = __webpack_require__(332);
+	var _FeaturedProject = __webpack_require__(332);
 
-	var _FeaturedLesson2 = _interopRequireDefault(_FeaturedLesson);
+	var _FeaturedProject2 = _interopRequireDefault(_FeaturedProject);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27218,11 +27218,11 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'container' },
-	        _react2.default.createElement(_FeaturedLesson2.default, { lessonId: '1', align: 'right' }),
+	        _react2.default.createElement(_FeaturedProject2.default, { projectId: '1', align: 'right' }),
 	        _react2.default.createElement('hr', { className: 'featurette-divier' }),
-	        _react2.default.createElement(_FeaturedLesson2.default, { lessonId: '2', align: 'left' }),
+	        _react2.default.createElement(_FeaturedProject2.default, { projectId: '2', align: 'left' }),
 	        _react2.default.createElement('hr', { className: 'featurette-divier' }),
-	        _react2.default.createElement(_FeaturedLesson2.default, { lessonId: '3', align: 'right' })
+	        _react2.default.createElement(_FeaturedProject2.default, { projectId: '3', align: 'right' })
 	      )
 	    );
 	  }
@@ -29376,10 +29376,10 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	    displayName: 'FeaturedLesson',
+	    displayName: 'FeaturedProject',
 	    getInitialState: function getInitialState() {
 	        return {
-	            lesson: {
+	            project: {
 	                name: '',
 	                description: '',
 	                imageUrl: ''
@@ -29387,16 +29387,16 @@
 	        };
 	    },
 	    componentDidMount: function componentDidMount() {
-	        var url = 'data/lessons/lesson' + this.props.lessonId + '.json';
-	        this.lessonRequest = $.get(url, function (data) {
+	        var url = 'data/projects/project' + this.props.projectId + '.json';
+	        this.projectRequest = $.get(url, function (data) {
 	            this.setState(function (state) {
-	                state.lesson = data;
+	                state.project = data;
 	                return state;
 	            });
 	        }.bind(this));
 	    },
 	    componentWillUnmount: function componentWillUnmount() {
-	        this.lessonRequest.abort();
+	        this.projectRequest.abort();
 	    },
 	    render: function render() {
 	        return _react2.default.createElement(
@@ -29408,23 +29408,23 @@
 	                _react2.default.createElement(
 	                    'h2',
 	                    { className: 'featurette-heading' },
-	                    this.state.lesson.name
+	                    this.state.project.name
 	                ),
 	                _react2.default.createElement(
 	                    'p',
 	                    null,
-	                    this.state.lesson.description
+	                    this.state.project.description
 	                ),
 	                _react2.default.createElement(
 	                    _reactRouter.Link,
-	                    { to: "/lessons/" + this.props.lessonId, className: 'info' },
-	                    'See the full lesson...'
+	                    { to: "/projects/" + this.props.projectId, className: 'info' },
+	                    'See the full project...'
 	                )
 	            ),
 	            _react2.default.createElement(
 	                'div',
 	                { className: "col-md-5" + (this.props.align == 'left' ? " col-md-pull-7" : "") },
-	                _react2.default.createElement('img', { className: 'featurette-image img-responsive center-block', alt: '500x500', src: this.state.lesson.imageUrl })
+	                _react2.default.createElement('img', { className: 'featurette-image img-responsive center-block', alt: '500x500', src: this.state.project.imageUrl })
 	            )
 	        );
 	    }
@@ -29451,21 +29451,21 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	  displayName: 'Lessons',
+	  displayName: 'Projects',
 	  getInitialState: function getInitialState() {
 	    return {
-	      lessons: []
+	      projects: []
 	    };
 	  },
 	  componentDidMount: function componentDidMount() {
-	    this.lessonsRequest = $.get("data/lessons/index.json", function (data) {
+	    this.projectsRequest = $.get("data/projects/index.json", function (data) {
 	      this.setState({
-	        lessons: data.lessons
+	        projects: data.projects
 	      });
 	    }.bind(this));
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
-	    this.lessonsRequest.abort();
+	    this.projectsRequest.abort();
 	  },
 	  render: function render() {
 	    return _react2.default.createElement(
@@ -29477,17 +29477,17 @@
 	        _react2.default.createElement(
 	          'h1',
 	          null,
-	          'Lessons'
+	          'Projects'
 	        )
 	      ),
-	      _react2.default.createElement(LessonSummaryList, { lessons: this.state.lessons })
+	      _react2.default.createElement(ProjectSummaryList, { projects: this.state.projects })
 	    );
 	  }
 	});
 
 
-	var LessonSummary = _react2.default.createClass({
-	  displayName: 'LessonSummary',
+	var ProjectSummary = _react2.default.createClass({
+	  displayName: 'ProjectSummary',
 
 	  render: function render() {
 	    return _react2.default.createElement(
@@ -29496,18 +29496,18 @@
 	      _react2.default.createElement(
 	        'div',
 	        { className: 'hovereffect' },
-	        _react2.default.createElement('img', { className: 'img-responsive', src: this.props.lesson.imageUrl }),
+	        _react2.default.createElement('img', { className: 'img-responsive', src: this.props.project.imageUrl }),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'overlay' },
 	          _react2.default.createElement(
 	            'h2',
 	            null,
-	            this.props.lesson.name
+	            this.props.project.name
 	          ),
 	          _react2.default.createElement(
 	            _reactRouter.Link,
-	            { to: "/lessons/" + this.props.lesson.id, className: 'info' },
+	            { to: "/projects/" + this.props.project.id, className: 'info' },
 	            'see more'
 	          )
 	        )
@@ -29516,15 +29516,15 @@
 	  }
 	});
 
-	var LessonSummaryList = _react2.default.createClass({
-	  displayName: 'LessonSummaryList',
+	var ProjectSummaryList = _react2.default.createClass({
+	  displayName: 'ProjectSummaryList',
 
 	  render: function render() {
 	    return _react2.default.createElement(
 	      _reactBootstrap.Row,
 	      null,
-	      this.props.lessons.map(function (lesson) {
-	        return _react2.default.createElement(LessonSummary, { key: lesson.id, lesson: lesson });
+	      this.props.projects.map(function (project) {
+	        return _react2.default.createElement(ProjectSummary, { key: project.id, project: project });
 	      })
 	    );
 	  }
@@ -46252,26 +46252,26 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	  displayName: 'Lesson',
+	  displayName: 'Project',
 	  getInitialState: function getInitialState() {
 	    return {
-	      lesson: {
+	      project: {
 	        name: '',
 	        steps: []
 	      }
 	    };
 	  },
 	  componentDidMount: function componentDidMount() {
-	    var url = 'data/lessons/lesson' + this.props.params.lessonId + '.json';
-	    this.lessonRequest = $.get(url, function (data) {
+	    var url = 'data/projects/project' + this.props.params.projectId + '.json';
+	    this.projectRequest = $.get(url, function (data) {
 	      this.setState(function (state) {
-	        state.lesson = data;
+	        state.project = data;
 	        return state;
 	      });
 	    }.bind(this));
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
-	    this.lessonRequest.abort();
+	    this.projectRequest.abort();
 	  },
 	  render: function render() {
 	    return _react2.default.createElement(
@@ -46289,7 +46289,7 @@
 	            _react2.default.createElement(
 	              'h1',
 	              null,
-	              this.state.lesson.name
+	              this.state.project.name
 	            )
 	          )
 	        )
@@ -46300,7 +46300,7 @@
 	        _react2.default.createElement(
 	          _reactBootstrap.Col,
 	          { lg: 12 },
-	          _react2.default.createElement(_Steps2.default, { steps: this.state.lesson.steps })
+	          _react2.default.createElement(_Steps2.default, { steps: this.state.project.steps })
 	        )
 	      )
 	    );

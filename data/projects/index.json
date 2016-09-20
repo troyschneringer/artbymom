@@ -1,5 +1,5 @@
 {
-  "lessons": [
+  "projects": [
     {"id":1,"name":"super cool lesson 1","imageUrl":"http://placehold.it/500x500"},
     {"id":2,"name":"Art lesson 2","imageUrl":"http://placehold.it/500x500"},
     {"id":3,"name":"The third lesson","imageUrl":"http://placehold.it/500x500"},
