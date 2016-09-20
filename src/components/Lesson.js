@@ -15,7 +15,7 @@ export default React.createClass({
   },
 
   componentDidMount() {
-    var url = '/artbymom/data/lessons/' + this.props.params.lessonId + '.json';
+    var url = 'data/lessons/lesson' + this.props.params.lessonId + '.json';
     this.lessonRequest = $.get(url, function (data) {
       this.setState(state => {
         state.lesson = data;

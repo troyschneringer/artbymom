@@ -11,11 +11,11 @@ export default React.createClass({
           <h1>Real art. Real moms. Real fun.</h1>
         </Jumbotron>
         <div className="container">
-          <FeaturedLesson lessonId="lesson1" align="right" />
+          <FeaturedLesson lessonId="1" align="right" />
           <hr className="featurette-divier"/>
-          <FeaturedLesson lessonId="lesson2" align="left" />
+          <FeaturedLesson lessonId="2" align="left" />
           <hr className="featurette-divier"/>
-          <FeaturedLesson lessonId="lesson3" align="right" />
+          <FeaturedLesson lessonId="3" align="right" />
         </div>
       </div>
     );

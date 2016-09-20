@@ -13,6 +13,7 @@ export default React.createClass({
             <div id="navbar" className="collapse navbar-collapse">
               <ul className="nav navbar-nav">
                 <li><Link to="/lessons" activeClassName="active">Lessons</Link></li>
+                <li><a href="#">About</a></li>
               </ul>
             </div>
           </div>

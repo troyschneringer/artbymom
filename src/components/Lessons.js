@@ -1,3 +1,4 @@
+import { Grid, Row, Col } from 'react-bootstrap'
 import React from 'react'
 import { Link } from 'react-router'
 
@@ -9,7 +10,7 @@ export default React.createClass({
   },
 
   componentDidMount() {
-    this.lessonsRequest = $.get("/data/lessons/index.json", function(data){
+    this.lessonsRequest = $.get("data/lessons/index.json", function(data){
       this.setState({
         lessons: data.lessons
       });
@@ -22,12 +23,12 @@ export default React.createClass({
 
   render() {
     return (
-      <div className="container">
+      <Grid>
         <div className="page-header">
-            <h1>Lessons</h1>
-          </div>
+          <h1>Lessons</h1>
+        </div>
         <LessonSummaryList lessons={this.state.lessons}/>
-      </div>
+      </Grid>
     )
   }
 })
@@ -35,15 +36,15 @@ export default React.createClass({
 var LessonSummary = React.createClass({
   render: function() {
     return (
-      <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+      <Col md={3} xs={6}>
         <div className="hovereffect">
-          <img className="img-responsive" src={this.props.lesson.thumbnailUrl} />
+          <img className="img-responsive" src={this.props.lesson.imageUrl} />
           <div className="overlay">
           <h2>{this.props.lesson.name}</h2>
           <Link to={"/lessons/" + this.props.lesson.id} className="info">see more</Link>
         </div>
       </div>
-    </div>
+    </Col>
     )
   }
 });
@@ -51,10 +52,10 @@ var LessonSummary = React.createClass({
 var LessonSummaryList = React.createClass({
   render: function() {
     return (
-      <div>
+      <Row>
         {this.props.lessons.map(function(lesson){
           return <LessonSummary key={lesson.id} lesson={lesson} /> })}
-      </div>
+      </Row>
     );
   } 
 });

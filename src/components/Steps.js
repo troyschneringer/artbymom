@@ -7,7 +7,7 @@ var Step = React.createClass({
             <Row className="step">
                 <Col md={9} mdPush={(this.props.invert ? 3 : 0)} sm={7} smPush={(this.props.invert ? 5 : 0)}>
                     <div>
-                        <h4>{this.props.step.name}</h4>
+                        <h4> <span className="text-muted">Step {this.props.step.id}:</span> {this.props.step.name}</h4>
                     </div>
                     <div>
                         <p>{this.props.step.instructions}</p>

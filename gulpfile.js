@@ -1,7 +1,9 @@
 const babel = require('gulp-babel');
 const concat = require('gulp-concat');
 const gulp = require('gulp');
+const inject = require('gulp-inject-string');
 const jsoncombine = require("gulp-jsoncombine");
+const jsonTransform = require('gulp-json-transform');
 const less = require('gulp-less');
 const path = require('path');
 const minify = require('gulp-minify');
@@ -12,6 +14,16 @@ const webpack = require('webpack-stream');
 
 gulp.task('data', function() {
     gulp.src('./data/lessons/*.json')
+        .pipe(gulp.dest('./www/data/lessons'))
+        .pipe(jsonTransform(function(data, file) {
+            return {
+                id: data.id,
+                name: data.name,
+                imageUrl: data.imageUrl
+            };
+        }))
+        .pipe(concat('index.json', {newLine: ',\n    '}))
+        .pipe(inject.wrap('{\n  "lessons": [\n    ', '\n  ]\n}'))
         .pipe(gulp.dest('./www/data/lessons'));
 });
 
