@@ -1,5 +1,6 @@
 const babel = require('gulp-babel');
 const concat = require('gulp-concat');
+const ghPages = require('gulp-gh-pages');
 const gulp = require('gulp');
 const inject = require('gulp-inject-string');
 const jsoncombine = require("gulp-jsoncombine");
@@ -11,7 +12,6 @@ const webpack = require('webpack-stream');
 
 
 // Databases
-
 gulp.task('data', function() {
     gulp.src('./data/projects/*.json')
         .pipe(gulp.dest('./www/data/projects'))
@@ -25,6 +25,12 @@ gulp.task('data', function() {
         .pipe(concat('index.json', {newLine: ',\n    '}))
         .pipe(inject.wrap('{\n  "projects": [\n    ', '\n  ]\n}'))
         .pipe(gulp.dest('./www/data/projects'));
+});
+
+// GH pages
+gulp.task('gh-pages', function(){
+    return gulp.src('./www/**/*')
+        .pipe(ghPages());
 });
 
 // Less
@@ -87,3 +93,4 @@ gulp.task('webpack', function() {
 // Target tasks
 
 gulp.task('default', ['less', 'watch', 'webpack']);
+gulp.task('deploy', ['less', 'webpack', 'gh-pages']);
