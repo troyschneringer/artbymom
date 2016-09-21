@@ -27128,49 +27128,6 @@
 	    return _react2.default.createElement(
 	      'div',
 	      null,
-	      _react2.default.createElement(
-	        'nav',
-	        { className: 'navbar navbar-default navbar-fixed-top' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'container' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'navbar-header' },
-	            _react2.default.createElement(
-	              _reactRouter.IndexLink,
-	              { to: '/', className: 'navbar-brand' },
-	              'Home'
-	            )
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { id: 'navbar', className: 'collapse navbar-collapse' },
-	            _react2.default.createElement(
-	              'ul',
-	              { className: 'nav navbar-nav' },
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  _reactRouter.Link,
-	                  { to: '/projects', activeClassName: 'active' },
-	                  'Projects'
-	                )
-	              ),
-	              _react2.default.createElement(
-	                'li',
-	                null,
-	                _react2.default.createElement(
-	                  'a',
-	                  { href: '#' },
-	                  'About'
-	                )
-	              )
-	            )
-	          )
-	        )
-	      ),
 	      this.props.children
 	    );
 	  }
@@ -27194,9 +27151,13 @@
 
 	var _Jumbotron2 = _interopRequireDefault(_Jumbotron);
 
-	var _FeaturedProject = __webpack_require__(332);
+	var _Feature = __webpack_require__(332);
 
-	var _FeaturedProject2 = _interopRequireDefault(_FeaturedProject);
+	var _Feature2 = _interopRequireDefault(_Feature);
+
+	var _Projects = __webpack_require__(333);
+
+	var _Projects2 = _interopRequireDefault(_Projects);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27212,18 +27173,30 @@
 	        _react2.default.createElement(
 	          'h1',
 	          null,
-	          'Real art. Real moms. Real fun.'
+	          'Art By Mom'
+	        ),
+	        _react2.default.createElement(
+	          'h2',
+	          null,
+	          'Real Art | ',
+	          _react2.default.createElement(
+	            'em',
+	            null,
+	            'Real Fun'
+	          )
 	        )
 	      ),
 	      _react2.default.createElement(
-	        'div',
-	        { className: 'container' },
-	        _react2.default.createElement(_FeaturedProject2.default, { projectId: '1', align: 'right' }),
-	        _react2.default.createElement('hr', { className: 'featurette-divier' }),
-	        _react2.default.createElement(_FeaturedProject2.default, { projectId: '2', align: 'left' }),
-	        _react2.default.createElement('hr', { className: 'featurette-divier' }),
-	        _react2.default.createElement(_FeaturedProject2.default, { projectId: '3', align: 'right' })
-	      )
+	        _Feature2.default,
+	        { title: 'Everyone is an Artist', imageUrl: 'http://placehold.it/250x250', color: 'yellow' },
+	        'Thereafter he walked very carefully, with his eyes on the road, and when he saw a tiny ant toiling by he would step over it, so as not to harm it.  The Tin Woodman knew very well he had no heart, and therefore he took great care never to be cruel or unkind to anything. "You people with hearts," he said, "have something to guide you, and need never do wrong; but I have no heart, and so I must be very careful.  When Oz gives me a heart of course I needn\'t mind so much.\\" They were obliged to camp out that night under a large tree in the forest, for there were no houses near.'
+	      ),
+	      _react2.default.createElement(
+	        _Feature2.default,
+	        { title: 'Everyday is Art Class', imageUrl: 'http://placehold.it/250x250', align: 'left', color: 'blue' },
+	        'Thereafter he walked very carefully, with his eyes on the road, and when he saw a tiny ant toiling by he would step over it, so as not to harm it.  The Tin Woodman knew very well he had no heart, and therefore he took great care never to be cruel or unkind to anything. "You people with hearts," he said, "have something to guide you, and need never do wrong; but I have no heart, and so I must be very careful.  When Oz gives me a heart of course I needn\'t mind so much.\\" They were obliged to camp out that night under a large tree in the forest, for there were no houses near.'
+	      ),
+	      _react2.default.createElement(_Projects2.default, null)
 	    );
 	  }
 	});
@@ -29376,55 +29349,37 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	exports.default = _react2.default.createClass({
-	    displayName: 'FeaturedProject',
-	    getInitialState: function getInitialState() {
-	        return {
-	            project: {
-	                name: '',
-	                description: '',
-	                imageUrl: ''
-	            }
-	        };
-	    },
-	    componentDidMount: function componentDidMount() {
-	        var url = 'data/projects/project' + this.props.projectId + '.json';
-	        this.projectRequest = $.get(url, function (data) {
-	            this.setState(function (state) {
-	                state.project = data;
-	                return state;
-	            });
-	        }.bind(this));
-	    },
-	    componentWillUnmount: function componentWillUnmount() {
-	        this.projectRequest.abort();
-	    },
+	    displayName: 'Feature',
 	    render: function render() {
 	        return _react2.default.createElement(
 	            'div',
-	            { className: 'row featurette' },
+	            { className: "feature " + this.props.color },
 	            _react2.default.createElement(
 	                'div',
-	                { className: "col-md-7" + (this.props.align == 'left' ? " col-md-push-5" : "") },
+	                { className: 'container' },
 	                _react2.default.createElement(
-	                    'h2',
-	                    { className: 'featurette-heading' },
-	                    this.state.project.name
-	                ),
-	                _react2.default.createElement(
-	                    'p',
-	                    null,
-	                    this.state.project.description
-	                ),
-	                _react2.default.createElement(
-	                    _reactRouter.Link,
-	                    { to: "/projects/" + this.props.projectId, className: 'info' },
-	                    'See the full project...'
+	                    'div',
+	                    { className: 'row' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: "col-md-7" + (this.props.align == 'left' ? " col-md-push-5" : "") },
+	                        _react2.default.createElement(
+	                            'h2',
+	                            null,
+	                            this.props.title
+	                        ),
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            this.props.children
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: "col-md-5" + (this.props.align == 'left' ? " col-md-pull-7" : "") },
+	                        _react2.default.createElement('img', { className: 'img-circle img-responsive center-block', alt: '500x500', src: this.props.imageUrl })
+	                    )
 	                )
-	            ),
-	            _react2.default.createElement(
-	                'div',
-	                { className: "col-md-5" + (this.props.align == 'left' ? " col-md-pull-7" : "") },
-	                _react2.default.createElement('img', { className: 'featurette-image img-responsive center-block', alt: '500x500', src: this.state.project.imageUrl })
 	            )
 	        );
 	    }
