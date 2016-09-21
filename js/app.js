@@ -29362,7 +29362,7 @@
 	                    { className: 'row' },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: "col-md-7" + (this.props.align == 'left' ? " col-md-push-5" : "") },
+	                        { className: "col-md-6" + (this.props.align == 'left' ? " col-md-push-4" : " col-md-push-1") },
 	                        _react2.default.createElement(
 	                            'h2',
 	                            null,
@@ -29376,7 +29376,7 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: "col-md-5" + (this.props.align == 'left' ? " col-md-pull-7" : "") },
+	                        { className: "col-md-4" + (this.props.align == 'left' ? " col-md-pull-6" : " col-md-push-1") },
 	                        _react2.default.createElement('img', { className: 'img-circle img-responsive center-block', alt: '500x500', src: this.props.imageUrl })
 	                    )
 	                )
