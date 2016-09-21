@@ -1,22 +1,24 @@
 import React from 'react'
 import Jumbotron from 'react-bootstrap/lib/Jumbotron';
 
-import FeaturedProject from './FeaturedProject.js'
+import Feature from './Feature.js'
+import Projects from './Projects.js'
 
 export default React.createClass({
   render() {
     return (
       <div className="home">
         <Jumbotron>
-          <h1>Real art. Real moms. Real fun.</h1>
+          <h1>Art By Mom</h1>
+          <h2>Real Art | <em>Real Fun</em></h2>
         </Jumbotron>
-        <div className="container">
-          <FeaturedProject projectId="1" align="right" />
-          <hr className="featurette-divier"/>
-          <FeaturedProject projectId="2" align="left" />
-          <hr className="featurette-divier"/>
-          <FeaturedProject projectId="3" align="right" />
-        </div>
+        <Feature title="Everyone is an Artist" imageUrl="http://placehold.it/250x250" color="yellow">
+          Thereafter he walked very carefully, with his eyes on the road, and when he saw a tiny ant toiling by he would step over it, so as not to harm it.  The Tin Woodman knew very well he had no heart, and therefore he took great care never to be cruel or unkind to anything. "You people with hearts," he said, "have something to guide you, and need never do wrong; but I have no heart, and so I must be very careful.  When Oz gives me a heart of course I needn't mind so much.\" They were obliged to camp out that night under a large tree in the forest, for there were no houses near.
+        </Feature>
+        <Feature title="Everyday is Art Class" imageUrl="http://placehold.it/250x250" align="left" color="blue">
+          Thereafter he walked very carefully, with his eyes on the road, and when he saw a tiny ant toiling by he would step over it, so as not to harm it.  The Tin Woodman knew very well he had no heart, and therefore he took great care never to be cruel or unkind to anything. "You people with hearts," he said, "have something to guide you, and need never do wrong; but I have no heart, and so I must be very careful.  When Oz gives me a heart of course I needn't mind so much.\" They were obliged to camp out that night under a large tree in the forest, for there were no houses near.
+        </Feature>
+        <Projects />
       </div>
     );
   }
