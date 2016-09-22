@@ -24,14 +24,18 @@ export default React.createClass({
   render() {
     return (
       <div>
-        <h1>Projects</h1>
-        <ProjectSummaryList projects={this.state.projects}/>
+        <Grid>
+          <Row>
+            {this.state.projects.map(function(project){
+              return <ProjectThumbnail key={project.id} project={project} /> })}
+          </Row>
+        </Grid>
       </div>
     )
   }
 })
 
-var ProjectSummary = React.createClass({
+var ProjectThumbnail = React.createClass({
   render: function() {
     return (
         <Col md={4} xs={6} className="clearfix">
@@ -43,17 +47,4 @@ var ProjectSummary = React.createClass({
         </Col>
     )
   }
-});
-
-var ProjectSummaryList = React.createClass({
-  render: function() {
-    return (
-      <Grid>
-        <Row>
-          {this.props.projects.map(function(project){
-            return <ProjectSummary key={project.id} project={project} /> })}
-        </Row>
-      </Grid>
-    );
-  } 
 });

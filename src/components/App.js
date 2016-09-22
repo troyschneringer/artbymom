@@ -5,7 +5,7 @@ export default React.createClass({
   render() {
     return (
       <div>
-        {/*<nav className="navbar navbar-default navbar-fixed-top">
+        <nav className="navbar navbar-default navbar-fixed-top">
           <div className="container">
             <div className="navbar-header">
               <IndexLink to="/" className="navbar-brand">Home</IndexLink>
@@ -13,11 +13,11 @@ export default React.createClass({
             <div id="navbar" className="collapse navbar-collapse">
               <ul className="nav navbar-nav">
                 <li><Link to="/projects" activeClassName="active">Projects</Link></li>
-                <li><a href="#">About</a></li>
+                <li><Link to="/about" activeClassName="active">About</Link></li>
               </ul>
             </div>
           </div>
-        </nav>*/}
+        </nav>
         {this.props.children}
       </div>
     )
