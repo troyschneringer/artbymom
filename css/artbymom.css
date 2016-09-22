@@ -1,3 +1,14 @@
+.blue {
+  background-color: #010051;
+  color: #dbdaed;
+}
+.yellow {
+  background-color: #fadc30;
+  color: #000;
+}
+body {
+  padding-top: 50px;
+}
 .home .jumbotron {
   background: url('../images/painter.jpg') no-repeat center center;
   height: 500px;
@@ -29,16 +40,6 @@
 .home .feature .container .row {
   margin-bottom: 30px;
   margin-top: 30px;
-}
-.home .feature.blue {
-  background-color: #010051;
-}
-.home .feature.blue h2,
-.home .feature.blue p {
-  color: #dbdaed;
-}
-.home .feature.yellow {
-  background-color: #fadc30;
 }
 .hovereffect {
   clear: both;
