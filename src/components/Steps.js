@@ -5,16 +5,16 @@ var Step = React.createClass({
     render: function () {
         return (
             <Row className="step">
-                <Col md={9} mdPush={(this.props.invert ? 3 : 0)} sm={7} smPush={(this.props.invert ? 5 : 0)}>
+                <Col md={9} sm={7}>
                     <div>
-                        <h4> <span className="text-muted">Step {this.props.step.id}:</span> {this.props.step.name}</h4>
+                        <h4><span className="text-muted">Step {this.props.step.id}:</span> {this.props.step.name}</h4>
                     </div>
                     <div>
                         <p>{this.props.step.instructions}</p>
                     </div>
                 </Col>
-                <Col md={3} mdPull={(this.props.invert ? 9 : 0)} sm={5} smPull={(this.props.invert ? 7 : 0)}>
-                    <img className="img-circle img-responsive" src={this.props.step.imageUrl} alt={this.props.step.name} />
+                <Col md={3} sm={5}>
+                    <img className="img-thumbnail img-responsive" src={this.props.step.imageUrl} alt={this.props.step.name} />
                 </Col>
             </Row>
         )

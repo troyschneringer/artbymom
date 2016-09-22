@@ -19,7 +19,7 @@ gulp.task('data', function() {
             return {
                 id: data.id,
                 name: data.name,
-                imageUrl: data.imageUrl
+                images: data.images
             };
         }))
         .pipe(concat('index.json', {newLine: ',\n    '}))
@@ -91,6 +91,5 @@ gulp.task('webpack', function() {
 });
 
 // Target tasks
-
-gulp.task('default', ['less', 'watch', 'webpack']);
+gulp.task('default', ['data', 'less', 'watch', 'webpack']);
 gulp.task('deploy', ['less', 'webpack', 'gh-pages']);

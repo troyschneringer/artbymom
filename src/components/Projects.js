@@ -1,4 +1,4 @@
-import { Grid, Row, Col } from 'react-bootstrap'
+import { Grid, Row, Col, Thumbnail } from 'react-bootstrap'
 import React from 'react'
 import { Link } from 'react-router'
 
@@ -23,12 +23,10 @@ export default React.createClass({
 
   render() {
     return (
-      <Grid>
-        <div className="page-header">
-          <h1>Projects</h1>
-        </div>
+      <div>
+        <h1>Projects</h1>
         <ProjectSummaryList projects={this.state.projects}/>
-      </Grid>
+      </div>
     )
   }
 })
@@ -36,15 +34,13 @@ export default React.createClass({
 var ProjectSummary = React.createClass({
   render: function() {
     return (
-      <Col md={3} xs={6}>
-        <div className="hovereffect">
-          <img className="img-responsive" src={this.props.project.imageUrl} />
-          <div className="overlay">
-          <h2>{this.props.project.name}</h2>
-          <Link to={"/projects/" + this.props.project.id} className="info">see more</Link>
-        </div>
-      </div>
-    </Col>
+        <Col md={4} xs={6} className="clearfix">
+          <Thumbnail src={this.props.project.images.thumbnail} alt={this.props.project.name}>
+            <h3>{this.props.project.name}</h3>
+            <p>...</p>
+            <p><Link to={"/projects/" + this.props.project.id} className="info">see full project</Link></p>
+          </Thumbnail>
+        </Col>
     )
   }
 });
@@ -52,10 +48,12 @@ var ProjectSummary = React.createClass({
 var ProjectSummaryList = React.createClass({
   render: function() {
     return (
-      <Row>
-        {this.props.projects.map(function(project){
-          return <ProjectSummary key={project.id} project={project} /> })}
-      </Row>
+      <Grid>
+        <Row>
+          {this.props.projects.map(function(project){
+            return <ProjectSummary key={project.id} project={project} /> })}
+        </Row>
+      </Grid>
     );
   } 
 });
