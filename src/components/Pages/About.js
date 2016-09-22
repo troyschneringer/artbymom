@@ -1,10 +1,14 @@
+import { Grid } from 'react-bootstrap'
+
 import React from 'react'
 
 export default React.createClass({
   render() {
     return (
       <div>
-        <h1>About</h1>
+        <Grid>
+          <h1>About</h1>
+        </Grid>
       </div>
     );
   }
