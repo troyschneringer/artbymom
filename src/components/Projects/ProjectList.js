@@ -1,4 +1,4 @@
-import { Grid, Row, Col, Thumbnail } from 'react-bootstrap'
+import { Col, Grid, Label, Row, Thumbnail } from 'react-bootstrap'
 import React from 'react'
 import { Link } from 'react-router'
 
@@ -24,7 +24,7 @@ export default React.createClass({
   render() {
     return (
       <div>
-        <Grid>
+        <Grid className="project-list">
           <Row>
             {this.state.projects.map(function(project){
               return <ProjectThumbnail key={project.id} project={project} /> })}
@@ -41,10 +41,18 @@ var ProjectThumbnail = React.createClass({
         <Col md={4} xs={6} className="clearfix">
           <Thumbnail src={this.props.project.images.thumbnail} alt={this.props.project.name}>
             <h3>{this.props.project.name}</h3>
-            <p>...</p>
+            <div>
+              <Label bsStyle="primary">ages {this.props.project.age}</Label>
+              {this.props.project.categories.map(this._renderCategory)}
+            </div>
+            <p className="description">{this.props.project.description}</p>
             <p><Link to={"/projects/" + this.props.project.id} className="info">see full project</Link></p>
           </Thumbnail>
         </Col>
     )
+  },
+
+  _renderCategory: function(category, index) {
+    return <span key={index}>&nbsp;<Label>{category}</Label></span> 
   }
 });

@@ -19,6 +19,9 @@ gulp.task('data', function() {
             return {
                 id: data.id,
                 name: data.name,
+                age: data.age,
+                categories: data.categories || [],
+                description: data.description,
                 images: data.images
             };
         }))
