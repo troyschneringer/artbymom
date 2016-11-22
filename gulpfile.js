@@ -1,13 +1,15 @@
 const babel = require('gulp-babel');
 const concat = require('gulp-concat');
+const exec = require('child_process').exec;
 const ghPages = require('gulp-gh-pages');
 const gulp = require('gulp');
 const inject = require('gulp-inject-string');
 const jsoncombine = require("gulp-jsoncombine");
 const jsonTransform = require('gulp-json-transform');
 const less = require('gulp-less');
-const path = require('path');
 const minify = require('gulp-minify');
+const nodemon = require('gulp-nodemon');
+const path = require('path');
 const webpack = require('webpack-stream');
 
 
@@ -28,6 +30,20 @@ gulp.task('data', function() {
         .pipe(concat('index.json', {newLine: ',\n    '}))
         .pipe(inject.wrap('{\n  "projects": [\n    ', '\n  ]\n}'))
         .pipe(gulp.dest('./www/data/projects'));
+});
+
+// Dev
+gulp.task('dev', function () {
+    exec('heroku config:get DATABASE_URL -a artbymom', function (err, stdout, stderr) {
+        nodemon({
+            script: 'server.js',
+            env: { 
+                'DATABASE_URL': stdout,
+                'NODE_ENV': 'development',
+                'PGSSLMODE': 'require' 
+            }
+        });
+    });
 });
 
 // GH pages
