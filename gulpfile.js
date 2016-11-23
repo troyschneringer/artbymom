@@ -1,58 +1,32 @@
 const babel = require('gulp-babel');
+const clean = require('gulp-clean');
 const concat = require('gulp-concat');
 const exec = require('child_process').exec;
-const ghPages = require('gulp-gh-pages');
 const gulp = require('gulp');
-const inject = require('gulp-inject-string');
-const jsoncombine = require("gulp-jsoncombine");
-const jsonTransform = require('gulp-json-transform');
 const less = require('gulp-less');
 const minify = require('gulp-minify');
 const nodemon = require('gulp-nodemon');
 const path = require('path');
+const sourcemaps = require('gulp-sourcemaps');
 const webpack = require('webpack-stream');
 
-
-// Databases
-gulp.task('data', function() {
-    gulp.src('./data/projects/*.json')
-        .pipe(gulp.dest('./www/data/projects'))
-        .pipe(jsonTransform(function(data, file) {
-            return {
-                id: data.id,
-                name: data.name,
-                age: data.age,
-                categories: data.categories || [],
-                description: data.description,
-                images: data.images
-            };
-        }))
-        .pipe(concat('index.json', {newLine: ',\n    '}))
-        .pipe(inject.wrap('{\n  "projects": [\n    ', '\n  ]\n}'))
-        .pipe(gulp.dest('./www/data/projects'));
+// build tasks
+gulp.task('clean', function() {
+    gulp.src('./www/css', {read: false})
+        .pipe(clean());
+    gulp.src('./www/js', {read: false})
+        .pipe(clean());
 });
 
-// Dev
-gulp.task('dev', function () {
-    exec('heroku config:get DATABASE_URL -a artbymom', function (err, stdout, stderr) {
-        nodemon({
-            script: 'server.js',
-            env: { 
-                'DATABASE_URL': stdout,
-                'NODE_ENV': 'development',
-                'PGSSLMODE': 'require' 
-            }
-        });
-    });
-});
+gulp.task('js', () =>
+    gulp.src('./src/**/*.js')
+        .pipe(sourcemaps.init())
+        .pipe(babel())
+        .pipe(concat('app.js'))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('./www/js'))
+);
 
-// GH pages
-gulp.task('gh-pages', function(){
-    return gulp.src('./www/**/*')
-        .pipe(ghPages());
-});
-
-// Less
 gulp.task('less', function () {
   return gulp.src('./less/**/*.less')
     .pipe(less({
@@ -62,53 +36,56 @@ gulp.task('less', function () {
     .pipe(gulp.dest('./www/css'));
 });
 
-// React
-gulp.task('react', () =>
-    gulp.src('./src/**/*.js')
-        .pipe(babel({
-            presets: ['es2015', 'react']
+gulp.task('webpack', () =>
+    gulp.src('./src/app.js')
+        .pipe(webpack({
+            output: {
+                filename: 'app.js',
+            },
+            module: {
+                loaders: [
+                    {
+                        test: /\.js$/,
+                        exclude: /node_modules/,
+                        loader: 'babel-loader?presets[]=latest&presets[]=react'
+                    }
+                ]
+            }
         }))
-        .pipe(concat('artbymom.js'))
+        .pipe(minify({
+            ext: {
+                src:'.js',
+                min:'.min.js'
+            }
+        }))
         .pipe(gulp.dest('./www/js'))
 );
 
-// Watch
-gulp.task('watch', function() {
-    gulp.watch('./less/**/*.less', ['less']);
-    gulp.watch('./data/**/*.json', ['data']);
-    gulp.watch('./src/**/*.js', ['webpack']);
-});
-
-// Webpack
-gulp.task('webpack', function() {
-  return gulp.src('src/app.js')
-    .pipe(webpack({
-        output: {
-            filename: 'app.js',
-        },
-        module: {
-            loaders: [
-                {
-                    test: /\.js$/,
-                    exclude: /node_modules/,
-                    loader: 'babel-loader?presets[]=es2015&presets[]=react'
-                },
-                {
-                    test: /\.json$/,
-                    loader: 'json'
-                }
-            ]
-        }
-    }))
-    .pipe(minify({
-        ext: {
-            src:'.js',
-            min:'.min.js'
-        }
-    }))
-    .pipe(gulp.dest('./www/js'));
-});
+// Dev
+gulp.task('dev', ['build'], () =>
+    exec('heroku config:get DATABASE_URL -a artbymom', (err, stdout, stderr) => {
+        nodemon({
+            script: './app.js',
+            watch: ['./less', './src', './app.js'],
+            env: { 
+                'DATABASE_URL': stdout,
+                'NODE_ENV': 'development',
+                'PGSSLMODE': 'require' 
+            },
+            tasks: function (changedFiles) {
+                var tasks = []
+                if (!changedFiles) return tasks;
+                changedFiles.forEach(function (file) {
+                    console.info(path.dirname(file));
+                    //if (path.extname(file) === '.js' && !~tasks.indexOf('webpack')) tasks.push('webpack');
+                    if (path.extname(file) === '.js' && !~tasks.indexOf('js')) tasks.push('js');
+                    if (path.extname(file) === '.less' && !~tasks.indexOf('less')) tasks.push('less');
+                })
+                return tasks
+            }
+        });
+    })
+);
 
 // Target tasks
-gulp.task('default', ['data', 'less', 'watch', 'webpack']);
-gulp.task('deploy', ['less', 'webpack', 'gh-pages']);
+gulp.task('build', ['less', 'js']);

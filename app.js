@@ -1,8 +1,7 @@
 require('babel-register');
 
 // load environment from file
-var dotenv = require('dotenv');
-dotenv.load();
+require('dotenv').config();
 
 // express
 const express = require('express');
