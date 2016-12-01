@@ -1,5 +1,5 @@
 // import React from 'react';
-// import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom';
 // import ReactGA from 'react-ga';
 // import { IndexRoute, Router, Route, hashHistory } from 'react-router';
 
@@ -9,7 +9,7 @@
 // import Projects from './components/Pages/Projects.js';
 // import Project from './components/Pages/Project.js';
 
-// import AuthService from './utils/AuthService';
+import AuthService from './utils/AuthService';
 
 // auth0
 const auth = new AuthService(process.env.AUTH0_CLIENT_ID, 'artbymom.auth0.com');
@@ -26,6 +26,10 @@ function logPageView() {
   // ReactGA.pageview(window.location.pathname);
 }
 
+var container = document.createElement('div');
+//container.setAttribute('id', 'react-container');
+document.body.appendChild(container);
+
 ReactDOM.render((
   <Router history={hashHistory} onUpdate={logPageView}>
     <Route path="/" component={App} auth={auth}>
@@ -37,4 +41,4 @@ ReactDOM.render((
       <Route path="/projects/:projectId" component={Project}/>
     </Route>
   </Router>
-), document.getElementById('react-container'))
+), container)
