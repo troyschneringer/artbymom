@@ -1,9 +1,7 @@
 # Generated
 build
 .publish
-www/css
-www/data
-www/js
+www
 
 # Logs
 logs

@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/', express.static('www'));
 
 // api
-var projects = require('./routes/projects.js');
+var projects = require('./src/server/routes/projects.js');
 app.use('/api/projects', projects);
 
 app.listen(process.env.PORT || 3000);
